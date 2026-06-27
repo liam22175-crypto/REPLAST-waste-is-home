@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REPLAST WASTE IS HOME – Konfigurator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7eed7;
+      --ink: #fa920a;
+      --accent-yellow: #E8F000;
+      --accent-blue: #a9deac;
+      --accent-green: #6AAE3A;
+      --accent-pink: #E0436A;
+      --mid: #666666;
+      --field-bg: #FFFFFF;
+      --inkhead: #000000;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--inkhead);
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 0 60px 0;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      padding: 30px 22px 22px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .header-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 4px;
+    }
+
+    .header-brand {
+      font-family: 'Black Han Sans', 'Horizon', sans-serif;
+      font-size: 54px;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: var(--inkhead);
+      text-shadow: 3px 3px 0px var(--accent-yellow);
+      margin-bottom: 12px;
+    }
+
+    .header-tagline {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--mid);
+    }
+
+    /* ── BLOCKS ── */
+    .block {
+      padding: 20px 22px;
+    }
+
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .text-input {
+      width: 100%;
+      background: var(--field-bg);
+      border: 1.5px solid #D8D4CB;
+      border-bottom: 2px solid var(--ink);
+      border-radius: 4px 4px 0 0;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--inkhead);
+      outline: none;
+      transition: border-bottom-color 0.15s;
+    }
+
+    .text-input::placeholder { color: #BBBBBB; }
+    .text-input:focus { border-bottom-color: var(--accent-blue); }
+
+    /* ── PREFERENCES ── */
+    .section-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      color: var(--inkhead);
+      margin-bottom: 14px;
+    }
+
+    .pref-header-row {
+      display: flex;
+      align-items: center;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .ph-name { flex: 1; }
+
+    .yn-labels {
+      display: flex;
+      gap: 12px;
+      min-width: 64px;
+    }
+
+    .yn-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+      width: 26px;
+      text-align: center;
+    }
+
+    .pref-row {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+    }
+
+    .pref-name {
+      flex: 1;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.4;
+      padding-right: 12px;
+    }
+
+    .pref-buttons {
+      display: flex;
+      gap: 12px;
+      min-width: 64px;
+    }
+
+    .circle-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--inkhead);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.12s, border-color 0.12s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      flex-shrink: 0;
+    }
+
+    .circle-btn:active { transform: scale(0.85); }
+
+    .circle-btn.selected-y { background: var(--accent-green); border-color: var(--accent-green); }
+    .circle-btn.selected-n { background: var(--accent-pink);  border-color: var(--accent-pink); }
+
+    .circle-btn.selected-y::after,
+    .circle-btn.selected-n::after {
+      content: '';
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    /* ── INPUT ROWS ── */
+    .input-row {
+      padding: 14px 0;
+    }
+
+    /* ── SUBMIT ── */
+    .submit-wrap {
+      padding: 24px 22px 28px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--accent-blue);
+      color: #fff;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 17px; 
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
+      padding: 16px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #2a6a96;
+      transition: transform 0.1s, box-shadow 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .submit-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #2a6a96;
+    }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer {
+      margin: 0 22px 0;
+      padding: 14px;
+      background: #EEEAE0;
+      border-left: 3px solid #C8C0B0;
+    }
+
+    .disclaimer-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .disclaimer p {
+      font-size: 10px;
+      line-height: 1.65;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .disclaimer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-eyebrow">Waste is Home</div>
+    <div class="header-brand">REPLAST</div>
+    <p class="header-tagline">Warte nicht auf dein Traumhaus — Konfiguriere es jetzt!</p>
+  </header>
+
+  <!-- NAME -->
+  <div class="block" style="padding-bottom:4px;">
+    <div class="field-label">Name</div>
+    <input class="text-input" type="text" placeholder="Dein Name …" />
+  </div>
+
+  <!-- PREFERENCES -->
+  <div class="block">
+    <div class="section-heading">Konfiguration</div>
+
+    <div class="pref-header-row">
+      <div class="ph-name"></div>
+      <div class="yn-labels">
+        <span class="yn-label">Y</span>
+        <span class="yn-label">N</span>
+      </div>
+    </div>
+
+    <div class="pref-row">
+      <div class="pref-name">Mikroplastikfilter</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p1" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p1" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+    <div class="pref-row">
+      <div class="pref-name">UV-Stabilisator-Beschichtung</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p2" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p2" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+    <div class="pref-row">
+      <div class="pref-name">Regenwasser-Recycling-Modul</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p3" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p3" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+    <div class="pref-row">
+      <div class="pref-name">Akustische Schalldämmung</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p4" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p4" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+    <div class="pref-row">
+      <div class="pref-name">Notfall-Ausstieg (Manuelle Anti-Schmelzvorrichtung)</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p5" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p5" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+    <div class="pref-row">
+      <div class="pref-name">Autarke Energieversorgung (Solar-Plastik-Paneele)</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p6" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p6" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+    <div class="pref-row">
+      <div class="pref-name">Geruchsneutralisierung (Filteranlage)</div>
+      <div class="pref-buttons">
+        <button class="circle-btn" data-group="p7" data-val="Y" onclick="togglePref(this)"></button>
+        <button class="circle-btn" data-group="p7" data-val="N" onclick="togglePref(this)"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXT INPUTS -->
+  <div class="block" style="padding-top:0;">
+    <div class="input-row">
+      <div class="field-label">Farbpalette</div>
+      <input class="text-input" type="text" placeholder="z. B. Erdtöne, Grau, Naturweiß …" />
+    </div>
+    <div class="input-row">
+      <div class="field-label">Herkunft des Plastik-Materials</div>
+      <input class="text-input" type="text" placeholder="z. B. Meeresplastik, Industrieabfall …" />
+    </div>
+    <div class="input-row">
+      <div class="field-label">Gewünschte Wandstärke (in cm)</div>
+      <input class="text-input" type="text" inputmode="decimal" placeholder="z. B. 12 cm" />
+    </div>
+    <div class="input-row">
+      <div class="field-label">Extras / Wünsche</div>
+      <input class="text-input" type="text" placeholder="Sonderwünsche …" />
+    </div>
+    <div class="input-row">
+      <div class="field-label">Allergien / Materialunverträglichkeiten</div>
+      <input class="text-input" type="text" placeholder="z. B. keine PVC-haltigen Stoffe …" />
+    </div>
+    <div class="input-row">
+      <div class="field-label">Dislikes</div>
+      <input class="text-input" type="text" placeholder="Was du gar nicht magst …" />
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-wrap">
+    <button class="submit-btn" onclick="alert('Deine Konfiguration wurde abgeschickt!')">Traumhaus anfragen</button>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <div class="disclaimer-title">Hinweise</div>
+    <p>Durch die Nutzung der „REPLAST WASTE IS HOME"-Konfigurationssoftware erkennen Sie an, dass die daraus resultierenden Wohneinheiten aus recycelten Polymer-Aggregaten gefertigt sind. Der Nutzer akzeptiert das Risiko einer potenziellen Exposition gegenüber Rest-Toxinen, Weichmachern und Mikropartikeln, die aus dem verbauten Material freigesetzt werden können. Symptome wie Atemwegsbeschwerden, Hautreizungen oder hormonelle Dysbalancen gelten als bauartbedingte Normalität und berechtigen nicht zur Rückgabe oder Minderung.</p>
+    <p>Aufgrund der Materialzusammensetzung kann es bei einer Überschreitung der ortsüblichen Durchschnittstemperaturen zu einer Erweichung der tragenden Strukturen kommen. Eine Schmelzgefahr besteht ab einer Umgebungstemperatur von 42°C. Der Hersteller übernimmt keine Haftung für statische Deformationen, strukturelle Instabilität oder das Austreten gasförmiger Substanzen bei thermischer Belastung. Die Nutzung von externen Wärmequellen in unmittelbarer Nähe zur Gebäudehülle erfolgt auf eigene Gefahr.</p>
+  </div>
+
+  <script>
+    function togglePref(btn) {
+      const group = btn.dataset.group;
+      const val = btn.dataset.val;
+      document.querySelectorAll(`.circle-btn[data-group="${group}"]`).forEach(b => {
+        b.classList.remove('selected-y', 'selected-n');
+      });
+      btn.classList.add(val === 'Y' ? 'selected-y' : 'selected-n');
+    }
+  </script>
+
+</body>
+</html>
