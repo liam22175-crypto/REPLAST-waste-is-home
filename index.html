@@ -213,6 +213,38 @@
       box-shadow: 1px 1px 0px #2a6a96;
     }
 
+    /* ── PLAN BUTTONS ── */
+    .plan-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .plan-btn {
+      flex: 1;
+      padding: 10px 8px;
+      border: 2px solid #a9deac;
+      border-radius: 6px;
+      background: #daf0db;
+      color: #2a6a96;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s, box-shadow 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .plan-btn:active { transform: scale(0.96); }
+
+    .plan-btn.selected {
+      background: #a9deac;
+      border-color: #a9deac;
+      color: #fff;
+      box-shadow: 3px 3px 0px #2a6a96;
+    }
+
     /* ── DISCLAIMER ── */
     .disclaimer {
       margin: 0 22px 0;
@@ -258,6 +290,12 @@
   <!-- PREFERENCES -->
   <div class="block">
     <div class="section-heading">Konfiguration</div>
+
+    <div class="plan-selector">
+      <button class="plan-btn" onclick="selectPlan(this)">Single</button>
+      <button class="plan-btn" onclick="selectPlan(this)">Basic</button>
+      <button class="plan-btn" onclick="selectPlan(this)">Family</button>
+    </div>
 
     <div class="pref-header-row">
       <div class="ph-name"></div>
@@ -359,6 +397,11 @@
   </div>
 
   <script>
+    function selectPlan(btn) {
+      document.querySelectorAll('.plan-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
     function togglePref(btn) {
       const group = btn.dataset.group;
       const val = btn.dataset.val;
